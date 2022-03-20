@@ -61,7 +61,9 @@ def processing(T_measures = "../sampling_points/Point034/point034_T_measures.csv
     with open(T_measures, 'r') as file: 
         all_lines = file.readlines()
     file.close()
-    all_lines[0] = '#,"Date Heure, GMT+01:00","Temp., °C (LGR S/N: 10117166, SEN S/N: 10117166, LBL: Température)","Temp., °C (LGR S/N: 10117166, SEN S/N: 10117166, LBL: Température)","Temp., °C (LGR S/N: 10117166, SEN S/N: 10117166, LBL: Température)","Temp., °C (LGR S/N: 10117166, SEN S/N: 10117166, LBL: Température)","Hôte connecté (LGR S/N: 10117166)","Arrêté (LGR S/N: 10117166)",Fin de fichier (LGR S/N: 10117166) \n'   
+    if all_lines[0][0] != '"' or all_lines[0].strip()[-1] != '"':
+        print(all_lines[0][-1], all_lines[0][0])
+        all_lines.pop(0)   
     with open(T_measures, 'w') as file: 
         for line in all_lines: 
             file.write(line)
